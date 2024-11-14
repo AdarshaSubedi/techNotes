@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express")
 const app = express()
 const path =  require("path")
@@ -6,8 +7,11 @@ const cors = require("cors")
 const corsOptions = require("./config/corsOptions")
 const {logger} = require("./middleware/logger")
 const { errorHandler } = require('./middleware/errorHandler')
+const { log } = require('console')
 
 const PORT = process.env.PORT || 3500
+
+console.log(process.env.NODE_ENV)
 
 app.use(cors(corsOptions))
 
@@ -32,6 +36,7 @@ app.all('*', (req, res) => {
     }
 })
 
-
 app.use(errorHandler)
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+
+
